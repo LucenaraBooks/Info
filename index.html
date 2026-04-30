@@ -43,6 +43,14 @@
       padding-top: 20px;
       margin-top: 20px;
     }
+
+    /* TIMER STYLE */
+    .countdown {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #444;
+    }
   </style>
 </head>
 <body>
@@ -72,7 +80,12 @@
         
         A fun, gentle story about making choices and spending wisely.
       </p>
+
       <a class="button" href="https://www.amazon.com/" target="_blank">Coming Soon</a>
+
+      <!-- COUNTDOWN -->
+      <div id="countdown" class="countdown"></div>
+
     </div>
 
   </div>
@@ -80,5 +93,38 @@
 
   <h2>Contact</h2>
   <p>Email: LucenaraBooks@gmail.com</p>
+
+  <!-- TIMER SCRIPT -->
+  <script>
+    const countdown = document.getElementById("countdown");
+
+    const releaseDate = new Date("June 2, 2026 00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = releaseDate - now;
+
+      if (distance <= 0) {
+        countdown.innerHTML = "📚 Published!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      countdown.innerHTML = 
+        "📖 Releases in: " +
+        days + "d " +
+        hours + "h " +
+        minutes + "m " +
+        seconds + "s";
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+
 </body>
 </html>
